@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Homes{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+<p>select a home model:</p>
+<input type="radio" id="homeOne" name="homeSelect" value="homeOne">
+<label for="homeOne">1</label>
+<input type="radio" id="homeTwo" name="homeSelect" value="homeTwo">
+<label for="homeTwo">2</label>
+<input type="radio" id="homeThree" name="homeSelect" value="homeThree">
+<label for="homeThree">3</label>
+</form>
+{% endblock %}

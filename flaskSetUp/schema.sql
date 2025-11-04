@@ -1,17 +1,36 @@
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS homes;
+DROP TABLE IF EXISTS jobs;
 
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username text UNIQUE NOT NULL,
+    --position text NOT NULL,
     password text NOT NULL
 );
 
-CREATE TABLE posts (
+CREATE TABLE jobs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     author_id INTEGER NOT NULL,
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    title text NOT NULL,
-    body text NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES users (id)
+    stage text NOT NULL,
+    cost text NOT NULL
+);
+
+CREATE TABLE homes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    wood_required INTEGER NOT NULL,
+    brick_required INTEGER NOT NULL,    
+    nails_required INTEGER NOT NULL,
+    pipe_required INTEGER NOT NULL,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE prices (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    wood_price INTEGER NOT NULL,
+    brick_price INTEGER NOT NULL,    
+    nails_price INTEGER NOT NULL,
+    pipe_price INTEGER NOT NULL,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

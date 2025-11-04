@@ -32,7 +32,15 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
+    from . import seed
+    with app.app_context():
+        seed.seed()
+
     from . import auth
     app.register_blueprint(auth.bp)
+
+    from . import display
+    app.register_blueprint(display.bp)
+    app.add_url_rule('/', endpoint='index')
 
     return app
