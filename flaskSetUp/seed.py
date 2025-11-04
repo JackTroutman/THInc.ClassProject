@@ -12,7 +12,7 @@ def seed():
         'INSERT INTO homes (wood_required, brick_required, nails_required, pipe_required) VALUES (?, ?, ?, ?)',
         [
             (100, 50, 200, 30),
-            (80, 60, 150, 20),
+            (80, 120, 150, 20),
             (120, 40, 250, 50)
         ]
     )
