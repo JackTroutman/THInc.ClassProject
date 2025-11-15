@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Homes{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<form method="post">
+
+<label for="homes">Choose a home model:</label>
+
+<select name="homes" id="homes" required>
+ <option value="">Select a home model</option>
+ {% for item in items %}
+  <option value="{{ item.id }}" >Home {{ item.id }}</option>
+ {% endfor %}
+ <!--
+ <option value="homeOne">Wood cabin (homeOne)</option>
+ <option value="homeTwo">Brick house (HomeTwo)</option>
+ <option value="homeThree">Small villa (homeThree)</option>
+ -->
+</select>
+<br>
+<input type="submit" value="Get Required Materials">
+</form>
+{% if homeSelected %}
+<h3>home {{homeSelected.id}}</h3>
+<table>
+  <thead>
+    <tr>
+      <th>meterial</th>
+      <th>count</th>
+      <th>indv. price</th>
+      <th>total price</th>
+    <tr>
+      <th scope="row">Wood</th>
+      <td>{{ homeSelected.wood_required }}</td>
+      <td>{{ prices.wood_price }}</td>
+      <td>${{ homeSelected.wood_required * prices.wood_price }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Brick</th>
+      <td>{{ homeSelected.brick_required }}</td>
+      <td>{{ prices.brick_price }}</td>
+      <td>${{ homeSelected.brick_required * prices.brick_price }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Nails</th>
+      <td>{{ homeSelected.nails_required }}</td>
+      <td>{{ prices.nails_price }}</td>
+      <td>${{ homeSelected.nails_required * prices.nails_price }}</td>
+    </tr>
+      <tr>
+      <th scope="row">Pipe</th>
+      <td>{{ homeSelected.pipe_required }}</td>
+      <td>{{ prices.pipe_price }}</td>
+      <td>${{ homeSelected.pipe_required * prices.pipe_price }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Total</th>
+      <td></td>
+      <td></td>
+      <td>${{ (homeSelected.wood_required * prices.wood_price) + (homeSelected.brick_required * prices.brick_price) + (homeSelected.nails_required * prices.nails_price) + (homeSelected.pipe_required * prices.pipe_price) }}</td>
+    </tr>
+  </thead>
+ 
+</table>
+{% endif %}
+
+
+{% endblock %}

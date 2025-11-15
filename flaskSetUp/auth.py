@@ -1,5 +1,5 @@
 import functools
-
+import click
 from flask import Blueprint, flash, Flask, g, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 from flaskSetUp.db import get_db
@@ -11,6 +11,7 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        position = request.form['position']
         db = get_db()
         error = None
 
@@ -22,15 +23,15 @@ def register():
         if error is None:
             try:
                 db.execute(
-                    'INSERT INTO users (username, password) VALUES (?, ?)',
-                    (username, generate_password_hash(password))
+                    'INSERT INTO users (username, password, position) VALUES (?, ?, ?)',
+                    (username, generate_password_hash(password), position)
                 )
                 db.commit()
-                return redirect(url_for('auth.login'))
+                return redirect(url_for('display.displayHomes'))
             except db.IntegrityError:
                 error = f"User {username} is already registered."
             else:
-                return redirect(url_for('auth.login'))
+                return redirect(url_for('display.displayHomes'))
 
         flash(error)
 
@@ -55,7 +56,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('index'))
+            return redirect(url_for('display.displayHomes'))
 
         flash(error)
 
@@ -75,7 +76,31 @@ def load_logged_in_user():
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('auth.login'))
+
+@click.command('init-admin')
+def init_admin_command():
+    username = input("Enter admin username: ")
+    password = input("Enter admin password: ")
+    db = get_db()
+    error = None
+
+    if not username:
+        error = 'Username is required.'
+    elif not password:
+        error = 'Password is required.'
+    if error is None:
+        try:
+            db.execute(
+                'INSERT INTO users (username, password, position) VALUES (?, ?, ?)',
+                (username, generate_password_hash(password), 'admin')
+            )
+            db.commit()
+            print(f'Admin user {username} created successfully.')
+        except db.IntegrityError:
+            error = f"User {username} is already registered."
+
+
 
 def login_required(view):
     @functools.wraps(view)
@@ -86,3 +111,7 @@ def login_required(view):
         return view(**kwargs)
 
     return wrapped_view
+
+
+def init_app(app):
+    app.cli.add_command(init_admin_command)

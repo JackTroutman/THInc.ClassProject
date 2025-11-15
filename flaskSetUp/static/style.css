@@ -26,3 +26,5 @@ input.danger { color: #cc2f2e; }
 input[type=submit] { align-self: start; min-width: 10em; }
 input[type=submit]{ cursor: pointer; background: #007000; }
 input[type=submit]:hover { background: #707070; }
+input[type=radio] { align-self: start; margin-right: 0.5em; }
+table, th, td {border: 1px solid black;}

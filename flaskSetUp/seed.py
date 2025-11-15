@@ -8,12 +8,15 @@ def seed():
         print('homes table not empty; skipping seed')
         return
 
+
     db.executemany(
         'INSERT INTO homes (wood_required, brick_required, nails_required, pipe_required) VALUES (?, ?, ?, ?)',
         [
             (100, 50, 200, 30),
             (80, 120, 150, 20),
-            (120, 40, 250, 50)
+            (120, 40, 250, 50),
+            (90, 60, 180, 25),
+            (110, 70, 220, 40)
         ]
     )
 

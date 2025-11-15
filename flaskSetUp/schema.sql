@@ -5,8 +5,8 @@ DROP TABLE IF EXISTS jobs;
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username text UNIQUE NOT NULL,
-    --position text NOT NULL,
-    password text NOT NULL
+    password text NOT NULL,
+    position text NOT NULL
 );
 
 CREATE TABLE jobs (

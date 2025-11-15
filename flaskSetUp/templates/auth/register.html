@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Register{% endblock %}</h1>
+  <h1>{% block title %}Register users{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -10,6 +10,23 @@
     <input name="username" id="username" required>
     <label for="password">Password</label>
     <input type="password" name="password" id="password" required>
+    <p>
+    <label for="position">Position</label>
+    <br>
+    <input type="radio" name="position" value="PM" required>
+    <label for="PM">project manager</label>
+    <input type="radio" name="position" value="Foremen" required>
+    <label for="Foremen">Foremen</label>
+    <input type="radio" name="position" value="Crew" required>
+    <label for="Crew">Crew</label>
+    <br>
+    <input type="radio" name="position" value="Plumber" required>
+    <label for="Plumber">Plumber</label>
+    <input type="radio" name="position" value="Carpenter" required>
+    <label for="Carpenter">Carpenter</label>
+    <input type="radio" name="position" value="Electrician" required>
+    <label for="Electrician">Electrician</label>
+  </p>
     <input type="submit" value="Register">
   </form>
 {% endblock %}

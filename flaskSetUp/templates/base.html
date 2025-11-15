@@ -4,13 +4,13 @@
 <nav>
   <h1>FlaskSetUp</h1>
   <ul>
-    {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
-    {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+    {% if g.user.position == 'admin' %}
+      <li><a href="{{ url_for('auth.register') }}">Register Users</a>
     {% endif %}
+
+    <li><span>{{ g.user['username'] }}</span>
+    <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+
   </ul>
 </nav>
 <section class="content">
