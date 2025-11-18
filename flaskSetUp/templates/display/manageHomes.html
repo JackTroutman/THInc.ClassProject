@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Homes{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<form method="post">
+
+<label for="homes">Choose a home model:</label>
+
+<select name="options" id="options" required>
+ <option value="">Select a home model</option>
+ <option value="NewHome">New Home</option>
+ <option value="changePrices">changePrices</option>
+ {% for item in items %}
+  <option value="{{ item.id }}" >Home {{ item.id }}</option>
+ {% endfor %}
+</select>
+<br>
+<input type="submit" name="display" value="select">
+</form name="changePrices" >
+<form method ="post">
+{% if choice == "changePrices" %}
+<h3>{{choice}}</h3>
+<table>
+  <thead>
+  <tr>
+    
+  </tr>
+  <tr>
+    prices:
+    wood_price: <input type="number" name="wood_price" value="{{ prices.wood_price }}" step="0.01" required><br>
+    brick_price: <input type="number" name="brick_price" value="{{ prices.brick_price }}" step="0.01" required><br>
+    nails_price: <input type="number" name="nails_price" value="{{ prices.nails_price }}" step="0.01" required><br>
+    pipe_price: <input type="number" name="pipe_price" value="{{ prices.pipe_price }}" step="0.01" required><br>
+  </tr>
+  </thead>
+ 
+</table>
+
+ <input type="submit" name="display" value="submit">
+ </form>
+{% endif %}
+
+
+{% endblock %}

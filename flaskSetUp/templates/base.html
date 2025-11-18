@@ -6,8 +6,9 @@
   <ul>
     {% if g.user.position == 'admin' %}
       <li><a href="{{ url_for('auth.register') }}">Register Users</a>
+      <li><a href="{{ url_for('display.manageHomes') }}">Manage homes</a>
     {% endif %}
-
+    <li><a href="{{ url_for('display.displayHomes') }}">view Homes</a>
     <li><span>{{ g.user['username'] }}</span>
     <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
 
