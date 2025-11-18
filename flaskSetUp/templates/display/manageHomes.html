@@ -8,7 +8,7 @@
 
 <form method="post">
 
-<label for="homes">Choose a home model:</label>
+<label for="homes">Choose an option:</label>
 
 <select name="options" id="options" required>
  <option value="">Select a home model</option>
@@ -20,15 +20,43 @@
 </select>
 <br>
 <input type="submit" name="display" value="select">
-</form name="changePrices" >
+</form>
+{% if choice == "NewHome" %}
 <form method ="post">
-{% if choice == "changePrices" %}
 <h3>{{choice}}</h3>
 <table>
   <thead>
-  <tr>
-    
-  </tr>
+    <tr>
+      <th>meterial</th>
+      <th>count</th>
+    <tr>
+      <th scope="row">Wood</th>
+      <td><input type="number" name="wood_count" value="wood_count" required></td>
+    </tr>
+    <tr>
+      <th scope="row">Brick</th>
+      <td><input type="number" name="brick_count" value="brick_count" required></td>
+    </tr>
+    <tr>
+      <th scope="row">Nails</th>
+      <td><input type="number" name="nails_count" value="nails_count" required></td>
+    </tr>
+      <tr>
+      <th scope="row">Pipe</th>
+      <td><input type="number" name="pipe_count" value="pipe_count" required></td>
+    </tr>
+  </thead>
+</table>
+
+ <input type="submit" name="display" value="submit New Home">
+</form>
+{% endif %}
+{% if choice == "changePrices" %}
+</form name="changePrices" >
+<form method ="post">
+<h3>{{choice}}</h3>
+<table>
+  <thead>
   <tr>
     prices:
     wood_price: <input type="number" name="wood_price" value="{{ prices.wood_price }}" step="0.01" required><br>
@@ -40,8 +68,38 @@
  
 </table>
 
- <input type="submit" name="display" value="submit">
+ <input type="submit" name="display" value="submit price changes">
  </form>
+{% endif %}
+{% if homeSelected %}
+<form method ="post">
+<h3>{{homeSelected.id}}</h3>
+<table>
+  <thead>
+    <tr>
+      <th>meterial</th>
+      <th>count</th>
+    <tr>
+      <th scope="row">Wood</th>
+      <td><input type="number" name="wood_required" value="{{homeSelected.wood_required}}" required></td>
+    </tr>
+    <tr>
+      <th scope="row">Brick</th>
+      <td><input type="number" name="brick_required" value="{{homeSelected.brick_required}}" required></td>
+    </tr>
+    <tr>
+      <th scope="row">Nails</th>
+      <td><input type="number" name="nails_required" value="{{homeSelected.nails_required}}" required></td>
+    </tr>
+      <tr>
+      <th scope="row">Pipe</th>
+      <td><input type="number" name="pipe_required" value="{{homeSelected.pipe_required}}" required></td>
+    </tr>
+  </thead>
+</table>
+
+ <input type="submit" name="display" value="submit Home Update">
+</form>
 {% endif %}
 
 

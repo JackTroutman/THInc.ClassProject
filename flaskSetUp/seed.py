@@ -2,13 +2,13 @@ from flaskSetUp import create_app
 from flaskSetUp.db import get_db
 
 def seed():
+    # checks if data already exists
     db = get_db()
-    # don't insert if already has rows
     if db.execute('SELECT 1 FROM homes LIMIT 1').fetchone():
         print('homes table not empty; skipping seed')
         return
 
-
+    # inserts seed data into homes and prices tables
     db.executemany(
         'INSERT INTO homes (wood_required, brick_required, nails_required, pipe_required) VALUES (?, ?, ?, ?)',
         [
